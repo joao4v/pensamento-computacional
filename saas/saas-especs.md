@@ -169,7 +169,7 @@ O sistema foi pensado para suportar crescimento através de:
 
 ## Segurança
 
-- Autenticação com Spring Security (em desenvolvimento)  
+- Autenticação com Spring Security 
 - Controle de acesso por roles  
 - Validação de dados  
 - Aplicação de princípios de segurança  
