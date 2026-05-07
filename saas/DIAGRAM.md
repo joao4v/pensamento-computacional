@@ -1,0 +1,251 @@
+# Koala FSM Platform — Diagramas e Modelagem
+
+# 1. Introdução
+
+Este documento apresenta os principais diagramas arquiteturais e conceituais do projeto **Koala FSM Platform**.
+
+Os diagramas foram elaborados com o objetivo de representar:
+
+- estrutura do domínio
+- entidades principais
+- relacionamentos
+- fluxo operacional
+- arquitetura da aplicação
+- responsabilidades do sistema
+
+A modelagem busca representar um sistema corporativo moderno de *Field Service Management (FSM)* utilizando conceitos de engenharia de software e arquitetura backend.
+
+---
+
+# 2. Visão Geral do Domínio
+
+O sistema é composto por quatro entidades centrais:
+
+| Entidade | Responsabilidade |
+|---|---|
+| User | Usuários do sistema |
+| Order | Ordens de serviço |
+| WorkUnit | Equipes operacionais |
+| Vehicle | Veículos utilizados pelas equipes |
+
+---
+
+# 3. Diagrama de Domínio
+
+## Objetivo
+
+Representar os relacionamentos principais entre as entidades do sistema.
+
+---
+
+## Diagrama UML Simplificado
+
+```mermaid
+classDiagram
+
+class User {
+  Long id
+  String name
+  String email
+  UserRole role
+}
+
+class Order {
+  Long id
+  String customerName
+  String customerPhone
+  String address
+  OrderStatus status
+  Priority priority
+}
+
+class WorkUnit {
+  Long id
+  String name
+  WorkUnitType type
+}
+
+class Vehicle {
+  Long id
+  String model
+  String plate
+  String color
+  VehicleType type
+}
+
+User "*" -- "*" WorkUnit : members
+WorkUnit "1" --> "1" Vehicle : uses
+WorkUnit "1" --> "*" Order : executes
+```
+
+---
+
+## Interpretação
+
+### User
+
+Representa usuários autenticados do sistema.
+
+Papéis disponíveis:
+
+- ADMIN
+- DISPATCHER
+- AGENT
+
+---
+
+### Order
+
+Representa ordens de serviço executadas pelas equipes operacionais.
+
+---
+
+### WorkUnit
+
+Representa equipes responsáveis pela execução operacional.
+
+As equipes possuem:
+
+- membros
+- veículo associado
+- ordens atribuídas
+
+---
+
+### Vehicle
+
+Representa veículos utilizados nas operações de campo.
+
+---
+
+# 4. Fluxo Operacional de Ordens
+
+## Objetivo
+
+Representar o ciclo de vida operacional de uma ordem de serviço.
+
+---
+
+## Fluxo Principal
+
+```mermaid
+flowchart LR
+
+A[CRIADA] --> B[DESPACHADA]
+B --> C[A_CAMINHO]
+C --> D[NO_LOCAL]
+D --> E[EM_EXECUCAO]
+E --> F[CONCLUIDA]
+F --> G[FINALIZADA]
+
+A --> X[CANCELADA]
+B --> X
+C --> X
+D --> X
+E --> X
+```
+
+---
+
+## Interpretação do Fluxo
+
+| Status | Descrição |
+|---|---|
+| CRIADA | Ordem criada no sistema |
+| DESPACHADA | Ordem atribuída a uma equipe |
+| A_CAMINHO | Equipe deslocando para atendimento |
+| NO_LOCAL | Equipe presente no local |
+| EM_EXECUCAO | Serviço em andamento |
+| CONCLUIDA | Serviço executado |
+| FINALIZADA | Ordem encerrada |
+| CANCELADA | Ordem cancelada |
+
+---
+
+# 5. Arquitetura da Aplicação
+
+## Objetivo
+
+Representar a arquitetura em camadas utilizada no backend.
+
+---
+
+## Arquitetura em Camadas
+
+```mermaid
+flowchart TD
+
+A[Controller Layer] --> B[Service Layer]
+B --> C[Repository Layer]
+C --> D[(Database)]
+```
+
+---
+
+## Responsabilidades das Camadas
+
+| Camada | Responsabilidade |
+|---|---|
+| Controller | Recebimento das requisições HTTP |
+| Service | Regras de negócio |
+| Repository | Persistência de dados |
+| Database | Armazenamento |
+
+---
+
+# 6. Fluxo de Responsabilidades
+
+## Objetivo
+
+Representar como os diferentes tipos de usuários interagem com o sistema.
+
+---
+
+## Fluxo de Papéis
+
+```mermaid
+flowchart LR
+
+A[Dispatcher] --> B[Criar Ordem]
+A --> C[Atribuir Ordem]
+
+D[Agent] --> E[Executar Ordem]
+D --> F[Atualizar Status]
+
+G[Admin] --> H[Gerenciar Sistema]
+```
+
+---
+
+# 7. Relacionamentos do Sistema
+
+## Relacionamento entre Entidades
+
+| Relacionamento | Tipo |
+|---|---|
+| User ↔ WorkUnit | Many-to-Many |
+| WorkUnit → Vehicle | Many-to-One |
+| WorkUnit → Order | One-to-Many |
+
+---
+
+# 8. Regras Estruturais
+
+## Equipes Operacionais
+
+| Tipo de Equipe | Quantidade Permitida |
+|---|---|
+| UMPLA | 1 membro |
+| DUPLA | 2 membros |
+| TRIO | 3 membros |
+| SQUAD | 4 ou mais membros |
+
+---
+
+## Compatibilidade de Veículos
+
+| Veículo | Restrição |
+|---|---|
+| MOTO | Apenas UMPLA |
+| PICKUP | Restrição para equipes grandes |
+| CAMINHAO | Compatível com múltiplas equipes |
