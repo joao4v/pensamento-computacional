@@ -40,43 +40,7 @@ Representar os relacionamentos principais entre as entidades do sistema.
 
 ## Diagrama UML Simplificado
 
-```mermaid
-classDiagram
-
-class User {
-  Long id
-  String name
-  String email
-  UserRole role
-}
-
-class Order {
-  Long id
-  String customerName
-  String customerPhone
-  String address
-  OrderStatus status
-  Priority priority
-}
-
-class WorkUnit {
-  Long id
-  String name
-  WorkUnitType type
-}
-
-class Vehicle {
-  Long id
-  String model
-  String plate
-  String color
-  VehicleType type
-}
-
-User "*" -- "*" WorkUnit : members
-WorkUnit "1" --> "1" Vehicle : uses
-WorkUnit "1" --> "*" Order : executes
-```
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/a3b24b28-d4c8-4eb7-9f5b-8eeb89342e44" />
 
 ---
 
@@ -128,22 +92,7 @@ Representar o ciclo de vida operacional de uma ordem de serviço.
 
 ## Fluxo Principal
 
-```mermaid
-flowchart LR
-
-A[CRIADA] --> B[DESPACHADA]
-B --> C[A_CAMINHO]
-C --> D[NO_LOCAL]
-D --> E[EM_EXECUCAO]
-E --> F[CONCLUIDA]
-F --> G[FINALIZADA]
-
-A --> X[CANCELADA]
-B --> X
-C --> X
-D --> X
-E --> X
-```
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/c8b5a043-c4a7-465c-a5a0-17a9de1aec8b" />
 
 ---
 
@@ -172,13 +121,7 @@ Representar a arquitetura em camadas utilizada no backend.
 
 ## Arquitetura em Camadas
 
-```mermaid
-flowchart TD
-
-A[Controller Layer] --> B[Service Layer]
-B --> C[Repository Layer]
-C --> D[(Database)]
-```
+<img width="767" height="459" alt="image" src="https://github.com/user-attachments/assets/a7120680-fd70-47c3-aa9d-613a9fe7a164" />
 
 ---
 
@@ -203,7 +146,6 @@ Representar como os diferentes tipos de usuários interagem com o sistema.
 
 ## Fluxo de Papéis
 
-```mermaid
 flowchart LR
 
 A[Dispatcher] --> B[Criar Ordem]
@@ -213,7 +155,6 @@ D[Agent] --> E[Executar Ordem]
 D --> F[Atualizar Status]
 
 G[Admin] --> H[Gerenciar Sistema]
-```
 
 ---
 
