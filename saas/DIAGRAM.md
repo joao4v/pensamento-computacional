@@ -121,7 +121,7 @@ Representar a arquitetura em camadas utilizada no backend.
 
 ## Arquitetura em Camadas
 
-<img width="767" height="459" alt="image" src="https://github.com/user-attachments/assets/a7120680-fd70-47c3-aa9d-613a9fe7a164" />
+<img width="1920" height="1080" alt="arquitetura de Camadas" src="https://github.com/user-attachments/assets/cccfa4c7-d254-467a-8b9e-63f23255dcee" />
 
 ---
 
