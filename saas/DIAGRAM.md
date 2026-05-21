@@ -92,7 +92,7 @@ Representar o ciclo de vida operacional de uma ordem de serviço.
 
 ## Fluxo Principal
 
-<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/c8b5a043-c4a7-465c-a5a0-17a9de1aec8b" />
+<img width="1920" height="1080" alt="fluxo-de-ordem" src="https://github.com/user-attachments/assets/935e5c32-9438-4929-8b18-0d3fa3707047" />
 
 ---
 
